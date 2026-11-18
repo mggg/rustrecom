@@ -7,7 +7,7 @@
 //! content (or the BENDL Metadata asset).
 
 use crate::common;
-use clap::{value_parser, Arg, ArgAction, ArgMatches, Command};
+use clap::{Arg, ArgAction, ArgMatches, Command, value_parser};
 use rustrecom::config::{parse_short_bursts_config, region_weights_from_map};
 use rustrecom::objectives::{ensure_derived_perim_column, polsby_popper_autoderive};
 use rustrecom::recom::short_bursts::{

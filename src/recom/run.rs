@@ -9,8 +9,8 @@
 //! It also collects rejection/self-loop statistics.
 use super::mst_diagnostics::{debug_directory, failure_message};
 use super::{
-    make_sampler, node_bound, random_split, sample_dist_pair, RecomParams, RecomProposal,
-    RecomVariant, WorkerBuffers,
+    RecomParams, RecomProposal, RecomVariant, WorkerBuffers, make_sampler, node_bound,
+    random_split, sample_dist_pair,
 };
 use crate::buffers::graph_connected_buffered;
 use crate::constraints::ChainConstraint;
@@ -18,7 +18,7 @@ use crate::graph::Graph;
 use crate::partition::Partition;
 use crate::stats::{SelfLoopCounts, SelfLoopReason, StatsWriter};
 use crossbeam::scope;
-use crossbeam_channel::{bounded, unbounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded, unbounded};
 use indicatif::{ProgressBar, ProgressStyle};
 use rand::rngs::SmallRng;
 use rand::{RngExt, SeedableRng};
@@ -370,7 +370,7 @@ where
     let node_ub = node_bound(&graph.pops, params.max_pop);
     let mut job_sends = vec![]; // main thread sends work to job threads
     let mut job_recvs = vec![]; // job threads receive work from main thread
-                                //
+    //
     for _ in 0..n_threads {
         let (s, r): (Sender<JobPacket>, Receiver<JobPacket>) = unbounded();
         job_sends.push(s);

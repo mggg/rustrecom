@@ -5,7 +5,7 @@ use mimalloc::MiMalloc;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
-use clap::{value_parser, Arg, Command};
+use clap::{Arg, Command, value_parser};
 // use rustrecom::init::graph_from_networkx;
 use petgraph::graph::{Graph, NodeIndex};
 use serde_json::Value;
@@ -88,7 +88,7 @@ fn stats_demo() -> Result<(BTreeMap<u64, u64>, BTreeMap<u64, u64>, BTreeMap<u64,
                 return Err(io::Error::new(
                     io::ErrorKind::Other,
                     format!("Could not parse line {} as JSON", line),
-                ))
+                ));
             }
         };
         if let Some(init_data) = line_data.get("init") {

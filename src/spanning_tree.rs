@@ -1,8 +1,8 @@
 //! Functions for generating random spanning trees.
 use crate::buffers::SpanningTreeBuffer;
 use crate::graph::{Edge, Graph};
-use rand::rngs::SmallRng;
 use rand::RngExt;
+use rand::rngs::SmallRng;
 use serde::Serialize;
 use std::cmp::{max, min};
 use std::fmt;

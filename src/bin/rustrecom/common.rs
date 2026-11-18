@@ -7,12 +7,12 @@
 //! that are real (variant policy, metadata asymmetries, per-command defaults)
 //! stay in the command modules.
 
-use clap::{value_parser, Arg, ArgAction, ArgMatches};
-use rustrecom::bendl::{reorder_graph_json, BendlGraphOrder};
+use clap::{Arg, ArgAction, ArgMatches, value_parser};
+use rustrecom::bendl::{BendlGraphOrder, reorder_graph_json};
 use rustrecom::graph::Graph;
 use rustrecom::init::{from_networkx, from_networkx_value};
 use rustrecom::objectives::{
-    make_objective, partial_node_cols, required_edge_cols, required_node_cols, ObjectiveConfig,
+    ObjectiveConfig, make_objective, partial_node_cols, required_edge_cols, required_node_cols,
 };
 use rustrecom::partition::Partition;
 use rustrecom::recom::RecomVariant;
@@ -20,7 +20,7 @@ use rustrecom::stats::{
     AssignmentsOnlyWriter, BenWriter, BendlBenStreamWriter, CanonicalWriter, JSONLWriter,
     PcompressWriter, ScoresWriter, StatsWriter, TSVWriter,
 };
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use sha3::{Digest, Sha3_256};
 use std::fmt::Write as _;
 use std::fs::OpenOptions;
@@ -296,9 +296,11 @@ pub fn enrich_bendl_meta(
     meta_object.insert("source_graph_sha3".to_string(), json!(source_graph_sha3));
     meta_object.insert(
         "embedded_graph_sha3".to_string(),
-        json!(embedded_graph_sha3
-            .clone()
-            .expect("bendl computes the embedded hash")),
+        json!(
+            embedded_graph_sha3
+                .clone()
+                .expect("bendl computes the embedded hash")
+        ),
     );
     meta_object.insert("bendl_graph_order".to_string(), json!(bendl_order.label()));
 }
@@ -517,13 +519,17 @@ pub fn optimizer_variant(
         "cut-edges-ust" => match region_weights {
             None => RecomVariant::CutEdgesUST,
             Some(_) => {
-                panic!("Region-aware variants are not currently implemented for uniform spanning tree sampling.")
+                panic!(
+                    "Region-aware variants are not currently implemented for uniform spanning tree sampling."
+                )
             }
         },
         "district-pairs-ust" => match region_weights {
             None => RecomVariant::DistrictPairsUST,
             Some(_) => {
-                panic!("Region-aware variants are not currently implemented for uniform spanning tree sampling.")
+                panic!(
+                    "Region-aware variants are not currently implemented for uniform spanning tree sampling."
+                )
             }
         },
         "reversible" => panic!("{}", reversible_error),

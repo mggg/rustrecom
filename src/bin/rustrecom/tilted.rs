@@ -7,14 +7,14 @@
 //! content (or the BENDL Metadata asset).
 
 use crate::common;
-use clap::{value_parser, Arg, ArgAction, ArgMatches, Command};
+use clap::{Arg, ArgAction, ArgMatches, Command, value_parser};
 use rustrecom::config::{parse_tilted_config, region_weights_from_map};
 use rustrecom::objectives::{ensure_derived_perim_column, polsby_popper_autoderive};
-use rustrecom::recom::tilted::{
-    core::REVERSIBLE_UNSUPPORTED, multi_tilted_runs_with_writer, ExponentialAcceptance,
-    FixedAcceptance, IncrementalBackend, LinearAcceptance,
-};
 use rustrecom::recom::RecomParams;
+use rustrecom::recom::tilted::{
+    ExponentialAcceptance, FixedAcceptance, IncrementalBackend, LinearAcceptance,
+    core::REVERSIBLE_UNSUPPORTED, multi_tilted_runs_with_writer,
+};
 use serde_json::json;
 
 pub fn command() -> Command {

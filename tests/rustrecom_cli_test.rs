@@ -1,5 +1,5 @@
 use binary_ensemble::io::bundle::BendlReader;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::{fs, path::PathBuf, process::Command};
 
 const BASE_ARGS: &[&str] = &[
@@ -153,8 +153,10 @@ fn sample_interval_rejects_invalid_values_and_writers() {
     document["sample_interval"] = json!(2);
     let output = run_config(&document.to_string(), &[]);
     assert!(!output.status.success());
-    assert!(String::from_utf8_lossy(&output.stderr)
-        .contains("only supported by assignment-producing writers"));
+    assert!(
+        String::from_utf8_lossy(&output.stderr)
+            .contains("only supported by assignment-producing writers")
+    );
 
     let mut document: Value = serde_json::from_str(&config("canonical", None, None)).unwrap();
     document["sample_interval"] = json!(0);
@@ -216,8 +218,10 @@ fn config_mode_rejects_cli_arguments() {
     let raw = config("canonical", None, None);
     let output = run_config(&raw, &["--writer", "canonical"]);
     assert!(!output.status.success());
-    assert!(String::from_utf8_lossy(&output.stderr)
-        .contains("cannot be combined with CLI arguments: writer"));
+    assert!(
+        String::from_utf8_lossy(&output.stderr)
+            .contains("cannot be combined with CLI arguments: writer")
+    );
 }
 
 #[test]

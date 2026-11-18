@@ -17,7 +17,7 @@ use binary_ensemble::io::reader::BenStreamReader;
 use serde_json::Value;
 use sha3::{Digest, Sha3_256};
 
-use rustrecom::bendl::{reorder_graph_json, BendlGraphOrder};
+use rustrecom::bendl::{BendlGraphOrder, reorder_graph_json};
 use rustrecom::init::from_networkx_value;
 use rustrecom::recom::run::multi_chain;
 use rustrecom::recom::{RecomParams, RecomVariant};

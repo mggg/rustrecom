@@ -9,4 +9,4 @@ pub mod core;
 mod packets;
 mod writers;
 
-pub use core::{multi_short_bursts_with_writer, ScoreValue};
+pub use core::{ScoreValue, multi_short_bursts_with_writer};

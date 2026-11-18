@@ -14,7 +14,7 @@ pub mod linear;
 mod packets;
 mod writers;
 
-pub use core::{multi_tilted_runs, multi_tilted_runs_with_writer, AcceptanceRule, ScoringBackend};
+pub use core::{AcceptanceRule, ScoringBackend, multi_tilted_runs, multi_tilted_runs_with_writer};
 pub use exponential::ExponentialAcceptance;
 pub use fixed::FixedAcceptance;
 pub use full_rescore::FullRescoreBackend;

@@ -3,8 +3,8 @@ use crate::buffers::{ConnectivityBuffers, SpanningTreeBuffer, SplitBuffer, Subgr
 use crate::graph::Graph;
 use crate::partition::Partition;
 use crate::spanning_tree::{RMSTSampler, RegionAwareSampler, SpanningTreeSampler, USTSampler};
-use rand::rngs::SmallRng;
 use rand::RngExt;
+use rand::rngs::SmallRng;
 
 /// ReCom batch size autotuning.
 //mod autotune;

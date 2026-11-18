@@ -1,8 +1,8 @@
-use rustrecom::constraints::{make_constraint, ChainConstraint, ConstraintConfig};
+use rustrecom::constraints::{ChainConstraint, ConstraintConfig, make_constraint};
 use rustrecom::graph::Graph;
 use rustrecom::partition::Partition;
-use rustrecom::recom::run::multi_chain_with_constraint;
 use rustrecom::recom::RecomProposal;
+use rustrecom::recom::run::multi_chain_with_constraint;
 use rustrecom::recom::{RecomParams, RecomVariant};
 use rustrecom::stats::{SelfLoopCounts, SelfLoopReason, StatsWriter};
 use std::io::Result as IoResult;

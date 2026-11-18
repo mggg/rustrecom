@@ -20,7 +20,7 @@
 //! Lower is better (run in minimize mode). See
 //! [`super::ObjectiveConfig::ByDistrictAbsDeviation`] for the JSON schema.
 
-use super::{district_share, leak_str, sum_attr_over, ObjectiveConfig};
+use super::{ObjectiveConfig, district_share, leak_str, sum_attr_over};
 use crate::graph::Graph;
 use crate::partition::Partition;
 use crate::recom::RecomProposal;

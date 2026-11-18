@@ -19,7 +19,9 @@ pub enum GraphError {
     ErrEdgeIndexMinimumValue { value: usize },
     #[snafu(display("Duplicate edge: {e0} {e1}"))]
     ErrDuplicateEdge { e0: usize, e1: usize },
-    #[snafu(display("Mismatch: edge list has {edge_list_nodes} nodes, population list has {pop_list_nodes} nodes"))]
+    #[snafu(display(
+        "Mismatch: edge list has {edge_list_nodes} nodes, population list has {pop_list_nodes} nodes"
+    ))]
     ErrNodeLengthMismatch {
         edge_list_nodes: usize,
         pop_list_nodes: usize,
@@ -168,7 +170,7 @@ impl Graph {
                 Err(_) => {
                     return Err(GraphError::ErrEdgeIndexParse {
                         edge_index: indices[0].into(),
-                    })
+                    });
                 }
             };
             let dst = match indices[1].parse::<usize>() {
@@ -176,7 +178,7 @@ impl Graph {
                 Err(_) => {
                     return Err(GraphError::ErrEdgeIndexParse {
                         edge_index: indices[1].into(),
-                    })
+                    });
                 }
             };
             edges.push(Edge(min(src, dst), max(src, dst)));

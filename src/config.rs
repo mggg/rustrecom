@@ -8,7 +8,7 @@
 //! version) fail loudly instead of being silently ignored.
 
 use serde::Deserialize;
-use serde_json::{from_str, Value};
+use serde_json::{Value, from_str};
 use std::collections::HashMap;
 
 const CONFIG_VERSION: u64 = 1;
@@ -338,44 +338,58 @@ mod tests {
 
     #[test]
     fn rejects_invalid_envelopes() {
-        assert!(parse_chain_config("not json")
-            .unwrap_err()
-            .contains("Invalid config JSON"));
-        assert!(parse_chain_config("[]")
-            .unwrap_err()
-            .contains("JSON object"));
+        assert!(
+            parse_chain_config("not json")
+                .unwrap_err()
+                .contains("Invalid config JSON")
+        );
+        assert!(
+            parse_chain_config("[]")
+                .unwrap_err()
+                .contains("JSON object")
+        );
 
         let mut config = minimal_config();
         config["version"] = json!(1.5);
-        assert!(parse_chain_config(&config.to_string())
-            .unwrap_err()
-            .contains("'version'"));
+        assert!(
+            parse_chain_config(&config.to_string())
+                .unwrap_err()
+                .contains("'version'")
+        );
         config["version"] = json!(2);
-        assert!(parse_chain_config(&config.to_string())
-            .unwrap_err()
-            .contains("Unsupported config version 2"));
+        assert!(
+            parse_chain_config(&config.to_string())
+                .unwrap_err()
+                .contains("Unsupported config version 2")
+        );
         config["version"] = json!(1);
         config["command"] = json!("tilted");
-        assert!(parse_chain_config(&config.to_string())
-            .unwrap_err()
-            .contains("Expected command 'chain'"));
+        assert!(
+            parse_chain_config(&config.to_string())
+                .unwrap_err()
+                .contains("Expected command 'chain'")
+        );
     }
 
     #[test]
     fn rejects_missing_required_and_unknown_fields() {
         let mut config = minimal_config();
         config.as_object_mut().unwrap().remove("pop_col");
-        assert!(parse_chain_config(&config.to_string())
-            .unwrap_err()
-            .contains("missing field `pop_col`"));
+        assert!(
+            parse_chain_config(&config.to_string())
+                .unwrap_err()
+                .contains("missing field `pop_col`")
+        );
 
         // Typos and fields from a newer format fail loudly instead of being
         // silently dropped.
         let mut config = minimal_config();
         config["pop_tol"] = json!(0.05);
-        assert!(parse_chain_config(&config.to_string())
-            .unwrap_err()
-            .contains("unknown field `pop_tol`"));
+        assert!(
+            parse_chain_config(&config.to_string())
+                .unwrap_err()
+                .contains("unknown field `pop_tol`")
+        );
     }
 
     #[test]

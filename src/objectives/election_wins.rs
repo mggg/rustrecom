@@ -5,7 +5,7 @@
 //! See [`super::ObjectiveConfig::ElectionWins`] for the JSON schema and full
 //! scoring semantics.
 
-use super::{sum_attr_over, Aggregation, ObjectiveConfig};
+use super::{Aggregation, ObjectiveConfig, sum_attr_over};
 use crate::graph::Graph;
 use crate::partition::Partition;
 use crate::recom::RecomProposal;

@@ -1,9 +1,9 @@
 // Functional tests for short bursts optimization.
 use rustrecom::graph::Graph;
-use rustrecom::objectives::{make_objective, IncrementalObjective};
+use rustrecom::objectives::{IncrementalObjective, make_objective};
 use rustrecom::partition::Partition;
-use rustrecom::recom::short_bursts::multi_short_bursts_with_writer;
 use rustrecom::recom::RecomProposal;
+use rustrecom::recom::short_bursts::multi_short_bursts_with_writer;
 use rustrecom::recom::{FullRescoreBackend, IncrementalBackend, RecomParams, RecomVariant};
 use rustrecom::stats::{ScoresWriter, SelfLoopCounts, StatsWriter};
 use std::io::Result as IOResult;

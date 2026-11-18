@@ -16,7 +16,7 @@
 use std::io::{self, Cursor};
 
 use binary_ensemble::json::graph::{
-    sort_json_file_by_key, sort_json_file_by_ordering, GraphOrderingMethod,
+    GraphOrderingMethod, sort_json_file_by_key, sort_json_file_by_ordering,
 };
 use serde_json::Value;
 

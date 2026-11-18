@@ -118,7 +118,7 @@ pub fn from_networkx_value(
                 )
                 .as_str(),
             ) as u32,
-            serde_json::Value::String(ref s) => s.parse::<u32>().expect(
+            serde_json::Value::String(s) => s.parse::<u32>().expect(
                 format!(
                     "When getting assignment, failed to unwrap the value {} as a u32",
                     s
@@ -308,7 +308,7 @@ pub fn graph_from_networkx_value(
                 )
                 .as_str(),
             ) as u32,
-            serde_json::Value::String(ref s) => s.parse::<u32>().unwrap(),
+            serde_json::Value::String(s) => s.parse::<u32>().unwrap(),
             _ => panic!(
                 "{}{}{}",
                 "Unexpected entry type in population column. ",

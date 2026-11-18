@@ -3,16 +3,16 @@ use crate::partition::Partition;
 use crate::recom::RecomProposal;
 #[cfg(feature = "linalg")]
 use crate::stats::subgraph_spanning_tree_count;
-use crate::stats::{partition_sums, proposal_sums, SelfLoopCounts, SelfLoopReason};
+use crate::stats::{SelfLoopCounts, SelfLoopReason, partition_sums, proposal_sums};
+use binary_ensemble::BenVariant;
 use binary_ensemble::io::bundle::format::{AssignmentFormat, KnownAssetKind};
 use binary_ensemble::io::bundle::{
     AddAssetOptions, BendlStreamSession, BendlWriteError, BendlWriter,
 };
 use binary_ensemble::io::writer::BenStreamWriter;
-use binary_ensemble::BenVariant;
 use pcompress::diff::Diff;
 use pcompress::encode::export_diff;
-use serde_json::{json, to_value, Value};
+use serde_json::{Value, json, to_value};
 use std::fs::File;
 use std::io::{self, BufWriter, Result, Write};
 

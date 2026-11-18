@@ -5,7 +5,7 @@
 //! See [`super::ObjectiveConfig::BandedGinglesPartial`] for the JSON schema and
 //! full scoring semantics.
 
-use super::{district_share, leak_str, sum_attr_over, ObjectiveConfig};
+use super::{ObjectiveConfig, district_share, leak_str, sum_attr_over};
 use crate::graph::Graph;
 use crate::partition::Partition;
 use crate::recom::RecomProposal;
@@ -233,11 +233,7 @@ pub(super) fn apply_proposal(
 /// approaches a maximum of `1` per offending district.
 #[inline]
 fn above_band_contribution(share: f64, upper: f64) -> f64 {
-    if share > upper {
-        upper / share
-    } else {
-        0.0
-    }
+    if share > upper { upper / share } else { 0.0 }
 }
 
 /// Recomputes the banded-gingles aggregates after a two-district swap, without

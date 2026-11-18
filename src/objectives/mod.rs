@@ -448,7 +448,9 @@ pub fn make_objective(config: &str) -> ObjectiveConfig {
 /// This is the legacy full-score API. For incremental scoring that caches
 /// per-district state and only rescans the two districts a `RecomProposal`
 /// changes, use [`make_objective`] and the [`IncrementalObjective`] trait.
-pub fn make_objective_fn(config: &str) -> impl Fn(&Graph, &Partition) -> f64 + Send + Clone + Copy {
+pub fn make_objective_fn(
+    config: &str,
+) -> impl Fn(&Graph, &Partition) -> f64 + Send + Clone + Copy + use<> {
     let obj = make_objective(config);
     move |graph: &Graph, partition: &Partition| -> f64 { obj.score(graph, partition) }
 }

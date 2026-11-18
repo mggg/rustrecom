@@ -27,12 +27,12 @@
 //! tests and ad-hoc explorations can use [`crate::recom::FullRescoreBackend`]
 //! to plug in arbitrary closure objectives.
 use super::super::{
-    make_sampler, node_bound, random_split, sample_dist_pair, RecomParams, RecomVariant,
-    ScoringBackend, WorkerBuffers,
+    RecomParams, RecomVariant, ScoringBackend, WorkerBuffers, make_sampler, node_bound,
+    random_split, sample_dist_pair,
 };
 use super::packets::{
-    broadcast_diff, terminate_burst_worker, BurstDiff, BurstJobPacket, BurstResult,
-    BurstScorePacket, BurstStatsPacket, ScoredProposal,
+    BurstDiff, BurstJobPacket, BurstResult, BurstScorePacket, BurstStatsPacket, ScoredProposal,
+    broadcast_diff, terminate_burst_worker,
 };
 use super::writers::{start_burst_score_writer, start_burst_stats_writer};
 use crate::buffers::graph_connected_buffered;
@@ -42,7 +42,7 @@ use crate::recom::mst_diagnostics::{debug_directory, failure_message};
 use crate::spanning_tree::SpanningTreeSampler;
 use crate::stats::{ScoresWriter, StatsWriter};
 use crossbeam::scope;
-use crossbeam_channel::{bounded, unbounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded, unbounded};
 use indicatif::{ProgressBar, ProgressStyle};
 use rand::rngs::SmallRng;
 use rand::{RngExt, SeedableRng};

@@ -38,7 +38,7 @@ pub use banded_gingles_partial::BandedGinglesPartialState;
 pub use by_district_abs_deviation::{AbsDevTotal, ByDistrictAbsDeviationState};
 pub use election_wins::ElectionWinsState;
 pub use gingles_partial::GinglesPartialState;
-pub use polsby_popper::{ensure_derived_perim_column, polsby_popper_autoderive, PolsbyPopperState};
+pub use polsby_popper::{PolsbyPopperState, ensure_derived_perim_column, polsby_popper_autoderive};
 
 /// Aggregation method for per-district scores.
 #[derive(Clone, Copy, Debug)]
@@ -430,7 +430,9 @@ pub fn make_objective(config: &str) -> ObjectiveConfig {
     match obj_type {
         // The `abs_deviation` name accepts the `target` + `n_target_districts`
         // shorthand and parses into a ByDistrictAbsDeviation.
-        "by_district_abs_deviation" | "abs_deviation" => by_district_abs_deviation::from_json(&data),
+        "by_district_abs_deviation" | "abs_deviation" => {
+            by_district_abs_deviation::from_json(&data)
+        }
         "gingles_partial" => gingles_partial::from_json(&data),
         "banded_gingles_partial" => banded_gingles_partial::from_json(&data),
         "election_wins" => election_wins::from_json(&data),
@@ -541,7 +543,7 @@ pub trait IncrementalObjective: Send + Clone {
     /// Returns the score that would result after applying `proposal` to the
     /// partition represented by `current`. Must not mutate `current`.
     fn score_proposal(&self, graph: &Graph, current: &Self::State, proposal: &RecomProposal)
-        -> f64;
+    -> f64;
 
     /// Mutates `state` to reflect applying `proposal`. Must produce state
     /// equivalent to rebuilding from the updated partition via [`Self::init`].

@@ -6,7 +6,7 @@ use mimalloc::MiMalloc;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
-use clap::{value_parser, Arg, Command};
+use clap::{Arg, Command, value_parser};
 use rustrecom::graph::Graph;
 use rustrecom::partition::Partition;
 use rustrecom::recom::run::multi_chain;

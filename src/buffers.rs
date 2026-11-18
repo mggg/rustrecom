@@ -1,5 +1,5 @@
 //! Buffer data structures to avoid memory reallocation.
-pub use self::connectivity::{graph_connected_buffered, ConnectivityBuffers};
+pub use self::connectivity::{ConnectivityBuffers, graph_connected_buffered};
 pub use self::random_range::RandomRangeBuffer;
 pub use self::spanning_tree::SpanningTreeBuffer;
 pub use self::split::SplitBuffer;
@@ -190,8 +190,8 @@ mod split {
 
 /// Buffer for random bytes.
 mod random_range {
-    use rand::rngs::SmallRng;
     use rand::RngExt;
+    use rand::rngs::SmallRng;
     use std::num::Wrapping;
 
     /// Size of the buffer of random values.

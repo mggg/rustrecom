@@ -211,8 +211,10 @@ fn version_propagates_to_subcommands_and_survives_legacy_options() {
 fn each_binary_name_reports_itself_in_version_and_usage() {
     let version = env!("CARGO_PKG_VERSION");
     let rustrecom_version = rustrecom(&["--version"]);
-    assert!(String::from_utf8_lossy(&rustrecom_version.stdout)
-        .contains(&format!("rustrecom {}", version)));
+    assert!(
+        String::from_utf8_lossy(&rustrecom_version.stdout)
+            .contains(&format!("rustrecom {}", version))
+    );
     let frcw_version = frcw(&["--version"]);
     assert!(String::from_utf8_lossy(&frcw_version.stdout).contains(&format!("frcw {}", version)));
 
@@ -305,8 +307,10 @@ fn frcw_tilted_shim_forwards_help_and_keeps_top_level_version() {
     // A bare `--version` stays top-level, matching the old binary's output.
     let version = shim(&["--version"]);
     assert!(version.status.success());
-    assert!(String::from_utf8_lossy(&version.stdout)
-        .contains(&format!("frcw_tilted {}", env!("CARGO_PKG_VERSION"))));
+    assert!(
+        String::from_utf8_lossy(&version.stdout)
+            .contains(&format!("frcw_tilted {}", env!("CARGO_PKG_VERSION")))
+    );
 }
 
 // --- Short-bursts coverage ------------------------------------------------

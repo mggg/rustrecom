@@ -19,12 +19,12 @@
 //!
 //! See `docs/tilted_runs_spec.md` for full architecture documentation.
 use super::super::{
-    make_sampler, node_bound, random_split, sample_dist_pair, RecomParams, RecomProposal,
-    RecomVariant, WorkerBuffers,
+    RecomParams, RecomProposal, RecomVariant, WorkerBuffers, make_sampler, node_bound,
+    random_split, sample_dist_pair,
 };
 use super::packets::{
-    collect_tilted_results, send_tilted_jobs, stop_tilted_workers, ScoredProposal, TiltedJobPacket,
-    TiltedResultPacket, TiltedScorePacket, TiltedStatsPacket,
+    ScoredProposal, TiltedJobPacket, TiltedResultPacket, TiltedScorePacket, TiltedStatsPacket,
+    collect_tilted_results, send_tilted_jobs, stop_tilted_workers,
 };
 use super::writers::{start_tilted_score_writer, start_tilted_stats_writer};
 use crate::buffers::graph_connected_buffered;
@@ -34,7 +34,7 @@ use crate::recom::mst_diagnostics::{debug_directory, failure_message};
 use crate::spanning_tree::SpanningTreeSampler;
 use crate::stats::{ScoresWriter, SelfLoopCounts, SelfLoopReason, StatsWriter};
 use crossbeam::scope;
-use crossbeam_channel::{bounded, unbounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded, unbounded};
 
 /// Capacity of the bounded channels that feed the stats and score writer
 /// threads. Large enough to absorb transient writer stalls; small enough to
@@ -63,7 +63,7 @@ pub trait AcceptanceRule: Send + Copy {
     /// This method is only called when the proposal is not strictly an
     /// improvement; strict improvements are always accepted by the engine.
     fn accept_worse(&self, current: f64, proposed: f64, maximize: bool, rng: &mut SmallRng)
-        -> bool;
+    -> bool;
 }
 
 /// Pluggable scoring strategy for ReCom-based optimizers.

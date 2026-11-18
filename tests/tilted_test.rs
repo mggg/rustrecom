@@ -2,11 +2,11 @@
 use rustrecom::graph::Graph;
 use rustrecom::objectives::{make_objective, make_objective_fn, required_node_cols};
 use rustrecom::partition::Partition;
-use rustrecom::recom::tilted::{
-    multi_tilted_runs, multi_tilted_runs_with_writer, AcceptanceRule, ExponentialAcceptance,
-    FixedAcceptance, FullRescoreBackend, IncrementalBackend, LinearAcceptance,
-};
 use rustrecom::recom::RecomProposal;
+use rustrecom::recom::tilted::{
+    AcceptanceRule, ExponentialAcceptance, FixedAcceptance, FullRescoreBackend, IncrementalBackend,
+    LinearAcceptance, multi_tilted_runs, multi_tilted_runs_with_writer,
+};
 use rustrecom::recom::{RecomParams, RecomVariant};
 use rustrecom::stats::{CanonicalWriter, ScoresWriter, SelfLoopCounts, StatsWriter};
 use serde_json::Value;
@@ -859,8 +859,8 @@ fn test_tilted_virginia_multi_election() {
 fn test_exponential_accepts_improvements_via_engine_invariant() {
     // The engine never calls accept_worse on a strictly improving proposal,
     // so this test exercises the rule's behavior when delta < 0 only.
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = ExponentialAcceptance { beta: 1.0 };
     let mut rng = SmallRng::seed_from_u64(42);
     // current=0.0, proposed=-1.0, maximize=true -> delta = -1.0
@@ -882,8 +882,8 @@ fn test_exponential_accepts_improvements_via_engine_invariant() {
 
 #[rstest]
 fn test_exponential_acceptance_rate_decays_with_delta(#[values(true, false)] maximize: bool) {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = ExponentialAcceptance { beta: 1.5 };
     let trials = 30_000;
     // Worse-proposal magnitudes (interpreted in the optimization direction).
@@ -918,8 +918,8 @@ fn test_exponential_acceptance_rate_decays_with_delta(#[values(true, false)] max
 
 #[test]
 fn test_exponential_zero_beta_accepts_everything() {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = ExponentialAcceptance { beta: 0.0 };
     let mut rng = SmallRng::seed_from_u64(7);
     // exp(0 * delta) = 1, so accept_worse must return true for any worse
@@ -932,8 +932,8 @@ fn test_exponential_zero_beta_accepts_everything() {
 
 #[rstest]
 fn test_linear_acceptance_rate_is_one_minus_loss(#[values(true, false)] maximize: bool) {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = LinearAcceptance { beta: 1.0 };
     let trials = 30_000;
     let losses = [0.1, 0.5, 0.9];
@@ -958,8 +958,8 @@ fn test_linear_acceptance_rate_is_one_minus_loss(#[values(true, false)] maximize
 
 #[test]
 fn test_linear_rejects_loss_of_one_or_more() {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = LinearAcceptance { beta: 1.0 };
     let mut rng = SmallRng::seed_from_u64(11);
     for _ in 0..1_000 {
@@ -970,8 +970,8 @@ fn test_linear_rejects_loss_of_one_or_more() {
 
 #[rstest]
 fn test_linear_acceptance_beta_scales_loss(#[values(true, false)] maximize: bool) {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = LinearAcceptance { beta: 10.0 };
     let (current, proposed) = if maximize { (0.0, -0.05) } else { (0.0, 0.05) };
     let mut rng = SmallRng::seed_from_u64(99);
@@ -989,8 +989,8 @@ fn test_linear_acceptance_beta_scales_loss(#[values(true, false)] maximize: bool
 
 #[rstest]
 fn test_linear_rejects_at_scaled_loss_cutoff(#[values(true, false)] maximize: bool) {
-    use rand::rngs::SmallRng;
     use rand::SeedableRng;
+    use rand::rngs::SmallRng;
     let rule = LinearAcceptance { beta: 10.0 };
     let (current, proposed) = if maximize { (0.0, -0.1) } else { (0.0, 0.1) };
     let mut rng = SmallRng::seed_from_u64(100);

@@ -1,7 +1,7 @@
 //! End-to-end tests for `--config` mode on the optimizer subcommands: CLI/config
 //! output equivalence, exact-config provenance, and schema rejection.
 
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -254,8 +254,10 @@ fn optimizer_config_mode_rejects_cli_arguments() {
         "--overwrite-output",
     ]);
     assert!(!run.status.success());
-    assert!(String::from_utf8_lossy(&run.stderr)
-        .contains("cannot be combined with CLI arguments: burst_length"));
+    assert!(
+        String::from_utf8_lossy(&run.stderr)
+            .contains("cannot be combined with CLI arguments: burst_length")
+    );
     fs::remove_dir_all(dir).ok();
 }
 

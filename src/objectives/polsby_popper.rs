@@ -142,10 +142,12 @@ pub(super) fn partial_node_cols(data: &Value) -> Vec<String> {
 
 /// Edge attribute columns required by a `polsby_popper` config.
 pub(super) fn required_edge_cols(data: &Value) -> Vec<String> {
-    vec![data["shared_perim_col"]
-        .as_str()
-        .unwrap_or_else(|| panic!("Missing 'shared_perim_col' in polsby_popper config"))
-        .to_string()]
+    vec![
+        data["shared_perim_col"]
+            .as_str()
+            .unwrap_or_else(|| panic!("Missing 'shared_perim_col' in polsby_popper config"))
+            .to_string(),
+    ]
 }
 
 /// Full (non-incremental) score over every district.

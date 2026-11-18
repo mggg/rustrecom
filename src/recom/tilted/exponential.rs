@@ -8,8 +8,8 @@
 //! random walk and `beta -> infinity` reduces to hill-climbing. The engine
 //! that consumes this rule lives in [`super::core`].
 
-use rand::rngs::SmallRng;
 use rand::RngExt;
+use rand::rngs::SmallRng;
 
 use super::core::AcceptanceRule;
 

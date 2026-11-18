@@ -8,9 +8,9 @@
 //! BENDL Metadata asset, or a `<stem>_metadata.jsonl` sidecar).
 
 use crate::common;
-use clap::{value_parser, Arg, ArgAction, ArgMatches, Command};
-use rustrecom::config::{parse_chain_config, region_weights_from_map, LoadedChainConfig};
-use rustrecom::constraints::{make_constraint, make_constraint_value, ConstraintConfig};
+use clap::{Arg, ArgAction, ArgMatches, Command, value_parser};
+use rustrecom::config::{LoadedChainConfig, parse_chain_config, region_weights_from_map};
+use rustrecom::constraints::{ConstraintConfig, make_constraint, make_constraint_value};
 use rustrecom::recom::run::multi_chain_with_constraint;
 use rustrecom::recom::{RecomParams, RecomVariant};
 use rustrecom::stats::{BendlBenStreamWriter, StatsWriter};
@@ -370,7 +370,9 @@ pub fn run(matches: &ArgMatches) -> Result<(), String> {
         "cut-edges-ust" => match region_weights {
             None => RecomVariant::CutEdgesUST,
             Some(_) => {
-                panic!("Region-aware variants are not currently implemented for uniform spanning tree sampling.")
+                panic!(
+                    "Region-aware variants are not currently implemented for uniform spanning tree sampling."
+                )
             }
         },
         "cut-edges-mst" => match region_weights {
@@ -381,7 +383,9 @@ pub fn run(matches: &ArgMatches) -> Result<(), String> {
         "district-pairs-ust" => match region_weights {
             None => RecomVariant::DistrictPairsUST,
             Some(_) => {
-                panic!("Region-aware variants are not currently implemented for uniform spanning tree sampling.")
+                panic!(
+                    "Region-aware variants are not currently implemented for uniform spanning tree sampling."
+                )
             }
         },
         "district-pairs-mst" => match region_weights {

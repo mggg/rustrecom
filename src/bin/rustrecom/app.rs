@@ -67,7 +67,11 @@ fn deprecation_warning(old: &str, replacement: &str) {
 }
 
 fn cli() -> Command {
-    Command::new(invoked_name())
+    let name = invoked_name();
+    Command::new(name.clone())
+        // clap otherwise takes `bin_name` from argv[0]'s file name, which keeps
+        // the `.exe` suffix on Windows and leaks it into usage lines.
+        .bin_name(name)
         .version(env!("CARGO_PKG_VERSION"))
         .author("Data and Democracy Lab <https://data-democracy.org>")
         .propagate_version(true)
